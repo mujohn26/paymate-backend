@@ -4,5 +4,7 @@ const router = express.Router();
 
 
 router.post("/create",userController.default.registerUser);
+router.delete("/delete/:id", userController.default.deleteUser);
+router.get("/",userController.default.getAllUsers)
 
 module.exports = router;
