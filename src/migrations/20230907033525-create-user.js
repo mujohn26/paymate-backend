@@ -16,7 +16,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       phone: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false, // Make the "phone" column not nullable
+        unique: true     // Make the "phone" column unique
       },
       createdAt: {
         allowNull: false,
