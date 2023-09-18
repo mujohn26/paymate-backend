@@ -9,16 +9,33 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      firstName: {
-        type: Sequelize.STRING
-      },
-      lastName: {
-        type: Sequelize.STRING
+      names: {
+        type: Sequelize.STRING,
+        allowNull: false, 
       },
       phone: {
         type: Sequelize.STRING,
-        allowNull: false, // Make the "phone" column not nullable
-        unique: true     // Make the "phone" column unique
+        allowNull: false, 
+        unique: true     
+      },
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false, 
+      },
+      isVerified: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false, 
+      },
+      isActive: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true,
+      },
+      verificationCode: {
+        type: Sequelize.INTEGER,
+      },
+      isVerificationCodeExpired: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       createdAt: {
         allowNull: false,

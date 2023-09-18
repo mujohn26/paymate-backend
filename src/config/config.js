@@ -23,3 +23,9 @@ module.exports.production = {
     }
   },
 };
+
+module.exports.twilioConfig = {
+  accountSid: 'AC8927a228ce66da38723a99bcbc563165',
+  authToken: '0c6dad5b8a6ed8500358b851e48053c0',
+  fromPhoneNumber: '+17472988654',
+};
