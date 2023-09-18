@@ -15,6 +15,10 @@ class UserServices {
     const deletedUser = await db.User.destroy({ where: { id: id } });
     return deletedUser;
   }
+  static async updateUserByPhone(phone, updatedUserData) {
+    const updateUser = await db.User.update(updatedUserData, { where: { phone: phone } });
+    return updateUser;
+  }
 }
 
 export default UserServices;
