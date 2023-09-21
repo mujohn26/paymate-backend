@@ -19,11 +19,11 @@ class GenerateOTP {
         }
       }
       static isOTPExpired(otpCreatedAt) {
-        // Set the expiration time for OTPs in milliseconds (20 minutes)
-        const otpExpirationTime = 20 * 60 * 1000; // 20 minutes in milliseconds
+        
+        const otpExpirationTime = 20 * 60 * 1000;
         const now = Date.now();
     
-        // Check if the OTP has expired
+        
         return now - otpCreatedAt > otpExpirationTime;
       }
     }
