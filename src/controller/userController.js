@@ -16,7 +16,7 @@ class UserController {
         });
         return;
       }
-      const otpCreatedAt = user.updateAt;
+      const otpCreatedAt = user.updatedAt;
       if (GenerateOTP.isOTPExpired(otpCreatedAt)) {
         res.status(400).json({
           error: `The OTP has expired. Please request a new OTP.`,
@@ -115,7 +115,7 @@ class UserController {
         phone: req.body.phone,
         password: req.body.password,
       };
-      console.log("=-=--=-=--=", loginInfo);
+      // console.log("=-=--=-=--=", loginInfo);
 
       const existUser = await UserServices.getUserByphone(
         loginInfo.phone
