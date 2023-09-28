@@ -1,5 +1,5 @@
 import express from 'express';
-import userRouter from "./src/routes/userRouter";
+import indexRoute from "./src/routes/index";
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import swaggerUi from 'swagger-ui-express';
@@ -25,7 +25,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use('/users', userRouter);
+app.use('/api', indexRoute);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.get('/', (req, res) => {

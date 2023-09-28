@@ -9,7 +9,7 @@ const options = {
             description: 'Force API documentation',
         },
     },
-    apis: ['./src/config/config.js'],
+    apis: ['apiDocs.js'],
 };
 
 const swaggerSpec = swaggerJsdoc(options);
