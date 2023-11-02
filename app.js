@@ -1,12 +1,12 @@
-import express from 'express';
-import indexRoute from "./src/routes/index";
-import bodyParser from 'body-parser';
-import cors from 'cors';
-import swaggerUi from 'swagger-ui-express';
-import swaggerSpec from './swaggerConfig';
+const express = require('express') ;
+const indexRoute = require("./src/routes/index");
+const bodyParser =require ('body-parser');
+const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./swaggerConfig');
 
 // Database
-import db from './src/models/index';
+const db = require('./src/models/index');
 
 // Test DB
 db.sequelize

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon  --exec babel-node app.js",
+    "dev": "SET NODE_ENV=development && nodemon app.js",
     "db-migrate": "npx sequelize db:migrate ",
     "db-undo-migration": "npx sequelize db:migrate:undo:all"
   },

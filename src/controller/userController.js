@@ -1,8 +1,8 @@
-import UserServices from "../services/user.services";
-import EncryptPassword from "../helpers/encrypt.helper";
-import GenerateOTP from "../helpers/otp.helper";
-import comparePassword from "../helpers/decryptor.helper";
-import TokenHelper from "../helpers/token.helper";
+const UserServices =require ("../services/user.services");
+const EncryptPassword =require ("../helpers/encrypt.helper");
+const GenerateOTP =require ("../helpers/otp.helper");
+const comparePassword =require ("../helpers/decryptor.helper");
+const TokenHelper =require ("../helpers/token.helper");
 class UserController {
 
   static async verifyOTP(req, res) {
@@ -192,4 +192,4 @@ class UserController {
   }
 }
 
-export default UserController;
+module.exports = UserController;

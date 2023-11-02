@@ -1,4 +1,4 @@
-import db from "../models";
+const db =require("../models");
 class UserServices {
 
   static async getUserByphone(phone) {
@@ -21,4 +21,4 @@ class UserServices {
   }
 }
 
-export default UserServices;
+module.exports = UserServices;

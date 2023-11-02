@@ -1,7 +1,7 @@
-import fs from 'fs';
-import path from 'path';
-import Sequelize from 'sequelize';
-import { development, production, testing } from '../config/config';
+const fs = require('fs');
+const path = require('path');
+const Sequelize = require('sequelize');
+const { development, production, testing } = require('../config/config');
 
 const environment = {
   development,
@@ -9,15 +9,13 @@ const environment = {
   testing
 };
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV;
+const env = process.env.NODE_ENV || 'development'; // Provide a default value if NODE_ENV is not set
 const config = environment[env];
-// if (!config || !config.url) {
-//   console.error('Configuration not found or missing "url" property.');
-//   process.exit(1); // Exit the application with an error code.
-// }
+
+
 
 const db = {};
-const sequelize = new Sequelize(config.url, config);
+const sequelize = new Sequelize(config, config);
 
 fs.readdirSync(__dirname)
   .filter((file) => {
@@ -36,4 +34,4 @@ Object.keys(db).forEach((modelName) => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-export default db;
+module.exports = db;

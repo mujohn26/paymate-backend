@@ -1,5 +1,5 @@
-import express from'express';
-import userController from '../controller/userController';
+const express =require('express');
+const userController =require ('../controller/userController');
 const router = express.Router();
 
 
@@ -10,4 +10,4 @@ router.get("/",userController.getAllUsers);
 router.patch("/verify/:phone",userController.verifyOTP);
 router.patch("/resend/:phone",userController.resendOTP);
 
-export default router;
+module.exports= router;
