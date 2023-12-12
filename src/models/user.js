@@ -1,8 +1,6 @@
 'use strict';
-const {
-  Model, BOOLEAN, INTEGER 
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
+import { Model, BOOLEAN, INTEGER } from 'sequelize';
+export default (sequelize, DataTypes) => {
   class User extends Model {
     /**
      * Helper method for defining associations.
