@@ -1,15 +1,15 @@
-const UserServices =require ("../services/user.services");
-const EncryptPassword =require ("../helpers/encrypt.helper");
-const GenerateOTP =require ("../helpers/otp.helper");
-const comparePassword =require ("../helpers/decryptor.helper");
-const TokenHelper =require ("../helpers/token.helper");
+import { getUserByphone, createUser, getAllUsers as _getAllUsers, deleteUser as _deleteUser } from "../services/user.services";
+import EncryptPassword from "../helpers/encrypt.helper";
+import { isOTPExpired, sendOTP } from "../helpers/otp.helper";
+import comparePassword from "../helpers/decryptor.helper";
+import { generateToken } from "../helpers/token.helper";
 class UserController {
 
   static async verifyOTP(req, res) {
     try {
       const { otp } = req.body;
       const { phone } = req.params;
-      const user = await UserServices.getUserByphone(phone);
+      const user = await getUserByphone(phone);
       if (!user) {
         res.status(404).json({
           error: `User with phone ${phone} not found`,
@@ -17,7 +17,7 @@ class UserController {
         return;
       }
       const otpCreatedAt = user.updatedAt;
-      if (GenerateOTP.isOTPExpired(otpCreatedAt)) {
+      if (isOTPExpired(otpCreatedAt)) {
         res.status(400).json({
           error: `The OTP has expired. Please request a new OTP.`,
         });
@@ -45,7 +45,7 @@ class UserController {
   static async resendOTP(req, res) {
     try {
       const { phone } = req.params; 
-      const user = await UserServices.getUserByphone(phone);
+      const user = await getUserByphone(phone);
 
       if (!user) {
         res.status(404).json({
@@ -58,7 +58,7 @@ class UserController {
       user.verificationCode = newOTP;
 
       await user.save();
-      GenerateOTP.sendOTP(user.phone, newOTP);
+      sendOTP(user.phone, newOTP);
       res.status(200).json({
         message: `New OTP sent successfully to user ${user.names}`,
       });
@@ -72,19 +72,19 @@ class UserController {
   static async registerUser(req, res) {
     try {
       const newUser = UserController.getRequestBodyData(req);
-      const existingUser = await UserServices.getUserByphone(newUser.phone);
+      const existingUser = await getUserByphone(newUser.phone);
 
       if (!existingUser) {
 
         const otp = Math.floor(1000 + Math.random() * 9000);
         newUser.verificationCode = otp;
 
-        const result = await UserServices.createUser(newUser);
+        const result = await createUser(newUser);
 
         if (result) {
 
 
-          GenerateOTP.sendOTP(newUser.phone, otp);
+          sendOTP(newUser.phone, otp);
 
           res.status(201).json({
             message: `User ${newUser.lastName} created successfully`,
@@ -117,7 +117,7 @@ class UserController {
       };
       // console.log("=-=--=-=--=", loginInfo);
 
-      const existUser = await UserServices.getUserByphone(
+      const existUser = await getUserByphone(
         loginInfo.phone
       );
       if (existUser !== null) {
@@ -130,7 +130,7 @@ class UserController {
             names: existUser.dataValues.names,
             phone: existUser.dataValues.phone,
           };
-          const token = await TokenHelper.generateToken(payload);
+          const token = await generateToken(payload);
           res.status(200).json({
             message: `User ${existUser.names} logged in successfully`,
             token,
@@ -161,7 +161,7 @@ class UserController {
   }
   static async getAllUsers(req, res) {
     try {
-      const allUser = await UserServices.getAllUsers();
+      const allUser = await _getAllUsers();
       const countUsers = allUser.length;
       res.status(200).json({
         status: "success",
@@ -178,7 +178,7 @@ class UserController {
   static async deleteUser(req, res) {
     try {
       const { id } = req.params;
-      const user = await UserServices.deleteUser(id);
+      const user = await _deleteUser(id);
       res.status(200).json({
         message: "User deleted successfully",
         data: user,
@@ -192,4 +192,4 @@ class UserController {
   }
 }
 
-module.exports = UserController;
+export default UserController;
