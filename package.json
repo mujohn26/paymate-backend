@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type":"module",
   "scripts": {
     "dev": "SET NODE_ENV=development && nodemon app.js",
     "db-migrate": "npx sequelize db:migrate ",

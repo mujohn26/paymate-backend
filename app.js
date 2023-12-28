@@ -1,15 +1,15 @@
-const express = require('express') ;
-const indexRoute = require("./src/routes/index");
-const bodyParser =require ('body-parser');
-const cors = require('cors');
-const swaggerUi = require('swagger-ui-express');
-const swaggerSpec = require('./swaggerConfig');
+import express, { json } from 'express';
+import indexRoute from "./src/routes/index";
+import { urlencoded, json as _json } from 'body-parser';
+import cors from 'cors';
+import { serve, setup } from 'swagger-ui-express';
+import swaggerSpec from './swaggerConfig';
 
 // Database
-const db = require('./src/models/index');
+import { sequelize } from './src/models/index';
 
 // Test DB
-db.sequelize
+sequelize
   .authenticate()
   .then(() => {
     console.log('Database connected...');
@@ -22,11 +22,11 @@ const app = express();
 app.use(cors());
 const PORT = process.env.PORT || 5000;
 
-app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(json());
+app.use(urlencoded({ extended: false }));
+app.use(_json());
 app.use('/api', indexRoute);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api-docs', serve, setup(swaggerSpec));
 
 app.get('/', (req, res) => {
   res.send('Welcome to paymate application!');
