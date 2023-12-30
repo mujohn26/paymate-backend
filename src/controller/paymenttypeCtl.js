@@ -1,5 +1,5 @@
 
-import { getUserByphone, createUser, getAllUsers as _getAllUsers, deleteUser as _deleteUser } from "../services/userServices.js";
+import { getpaymenttypeByphone, createpaymenttype, getAllpaymenttypes, deletepaymenttype, updatepaymenttypeByPhone } from "../services/paymenttypeService.js";
 import EncryptPassword from "../helpers/encrypt.helper.js";
 import GenerateOTP from "../helpers/otp.helper.js";
 import comparePassword from "../helpers/decryptor.helper.js";

@@ -1,7 +1,7 @@
 'use strict';
 import { Model } from 'sequelize';
 export default (sequelize, DataTypes) => {
-  class User extends Model {
+  class PaymentMethod extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,17 +11,13 @@ export default (sequelize, DataTypes) => {
       // define association here
     }
   }
-  User.init({
-    names: DataTypes.STRING,
-    phone: DataTypes.STRING,
-    password: DataTypes.STRING,
-    isVerified: DataTypes.BOOLEAN,
-    isActive: DataTypes.BOOLEAN,
-    verificationCode: DataTypes.STRING,
-    isVerificationCodeExpired: DataTypes.BOOLEAN
+  PaymentMethod.init({
+    accountId: DataTypes.STRING,
+    paymentId: DataTypes.STRING,
+    userId: DataTypes.INTEGER
   }, {
     sequelize,
-    modelName: 'User',
+    modelName: 'PaymentMethod',
   });
-  return User;
+  return PaymentMethod;
 };
