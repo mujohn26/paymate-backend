@@ -25,7 +25,11 @@ module.exports.production = {
 };
 
 module.exports.twilioConfig = {
-  accountSid: 'AC8927a228ce66da38723a99bcbc563165',
-  authToken: '0c6dad5b8a6ed8500358b851e48053c0',
-  fromPhoneNumber: '+17472988654',
+  accountSid: 'AC8464a522deac978cb8792658c9014082',
+  // 'AC8927a228ce66da38723a99bcbc563165',
+  authToken: '8c742216783db917acd8e8d1ad26e60b',
+  // '0c6dad5b8a6ed8500358b851e48053c0',
+  fromPhoneNumber: '+15042293358'
+  // '+17472988654',
+
 };

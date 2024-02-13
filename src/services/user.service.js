@@ -4,6 +4,11 @@ class UserServices {
   static async getUserByphone(phone) {
     return db.User.findOne({ where: { phone: phone } });
   }
+
+  static async getUserById(id) {
+    return db.User.findOne({ where: { id: id } });
+  }
+
   static async createUser(userData) {
     const response = db.User.create(userData);
     return response;

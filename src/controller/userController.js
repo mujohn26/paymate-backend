@@ -1,4 +1,4 @@
-import UserServices from "../services/user.services";
+import UserServices from "../services/user.service";
 import EncryptPassword from "../helpers/encrypt.helper";
 import GenerateOTP from "../helpers/otp.helper";
 import comparePassword from "../helpers/decryptor.helper";

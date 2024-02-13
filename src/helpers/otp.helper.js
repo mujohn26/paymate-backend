@@ -10,7 +10,7 @@ class GenerateOTP {
           const message = await client.messages.create({
             body: `Your OTP is: ${otp}`,
             from: twilioConfig.fromPhoneNumber, 
-            to: phone 
+            to: "+250785571790" 
           });
     
           console.log(`OTP sent to ${phone}: ${message.sid}`);
