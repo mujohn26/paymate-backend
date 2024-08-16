@@ -115,17 +115,23 @@ class UserController {
         phone: req.body.phone,
         password: req.body.password,
       };
-      // console.log("=-=--=-=--=", loginInfo);
+      
+      
 
       const existUser = await UserServices.getUserByphone(
         loginInfo.phone
       );
       if (existUser !== null) {
+
+       if (existUser.dataValues.loginCount == null){
+          await UserController.createPin(loginInfo.phone, req.body.pin)
+       }
         let decryptPasswordAndCompare = comparePassword(
           loginInfo.password,
           existUser.dataValues.password
         );
         if (decryptPasswordAndCompare) {
+
           const payload = {
             names: existUser.dataValues.names,
             phone: existUser.dataValues.phone,
@@ -159,6 +165,8 @@ class UserController {
       phone: req.body.phone,
     };
   }
+
+
   static async getAllUsers(req, res) {
     try {
       const allUser = await UserServices.getAllUsers();
@@ -189,6 +197,10 @@ class UserController {
         status: "Internal server error",
       });
     }
+  }
+
+  static async createPin(phoneNumber, pin){
+
   }
 }
 

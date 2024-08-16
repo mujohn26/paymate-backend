@@ -20,7 +20,9 @@ module.exports = (sequelize, DataTypes) => {
     isVerified:DataTypes.BOOLEAN,
     isActive:DataTypes.BOOLEAN,
     verificationCode:DataTypes.INTEGER,
-    isVerificationCodeExpired:DataTypes.BOOLEAN
+    isVerificationCodeExpired:DataTypes.BOOLEAN,
+    pin: DataTypes.STRING,
+    loginCount: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'User',

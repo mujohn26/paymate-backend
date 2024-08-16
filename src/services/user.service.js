@@ -24,6 +24,11 @@ class UserServices {
     const updateUser = await db.User.update(updatedUserData, { where: { phone: phone } });
     return updateUser;
   }
+
+  static async updateWalletById(walletId, updatedWalletData) {
+    const updateUser = await db.wallet.update(updatedWalletData, { where: { walletId: walletId } });
+    return updateUser;
+  }
 }
 
 export default UserServices;

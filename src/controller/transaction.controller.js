@@ -1,6 +1,9 @@
 import TransactionService from "../services/transaction.service";
 import UserServices from '../services/user.service'
 import comparePassword from '../helpers/decryptor.helper'
+import {v4 as uuidv4} from 'uuid'
+import { generate as generateShortUuid } from 'short-uuid';
+
 
 class TransactionController {
 
@@ -10,6 +13,8 @@ class TransactionController {
             const {walletId,amount,chargeId, currency, recipientName, recipientPhoneNumber, password, recipientCountry} = req.body
             const userInfo = await UserServices.getUserById(userId)
             const isPasswordCorrect = await TransactionController.checkPassword(userInfo.password, password)
+
+
             if (isPasswordCorrect) {
                 const recipientData = {
                     fullName: recipientName,
@@ -23,7 +28,8 @@ class TransactionController {
                     recipientId: recipient.dataValues.id,
                     amount: amount,
                     chargeId: chargeId,
-                    currency: currency
+                    currency: currency,
+                    transactionId: await TransactionController.generateTransactionId()
                 }
 
                 const transaction = await TransactionService.createTransaction(transactionData)
@@ -39,7 +45,7 @@ class TransactionController {
                 });
             }
             
-        } catch (error) {
+        } catch (error) { 
             res.status(500).json({
                 error:  `${error} occurred`
             })  
@@ -72,6 +78,16 @@ class TransactionController {
 
           return decryptPasswordAndCompare
     }
+
+    static async generateTransactionId() {
+        const shortUuid = generateShortUuid();
+        const currentDateTime = new Date();
+        const formattedDateTime = `${currentDateTime.getFullYear()}${( currentDateTime.getMonth() + 1).toString().padStart(2, '0')}${(currentDateTime.getDate()).toString().padStart(2, '0')}`;
+      
+        const transactionId = `${shortUuid.substring(0, 8)}-${formattedDateTime}`;
+        return transactionId;
+      }
+      
 
 }
 

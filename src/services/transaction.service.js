@@ -13,7 +13,7 @@ class TransactionService {
     }
 
     static async getTransactionsByUserId(userId) {
-        const transactions = db.Transaction.findAll({ 
+        const transactions = await db.Transaction.findAll({ 
             where: { senderId: `${userId}` },
             include: [
                 {model: db.recipient,},
@@ -23,8 +23,8 @@ class TransactionService {
 
             ],  
         }
-            );
-        return transactions
+    );
+    return transactions
     }
 
     static async getRecipeintById(recipientId) {

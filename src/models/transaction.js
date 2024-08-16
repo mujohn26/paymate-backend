@@ -16,11 +16,11 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'cascade',
         onUpdate: 'cascade'
       });
-      Transaction.hasMany(models.wallet, {
-        foreignKey: 'id',
-        onDelete: 'cascade',
-        onUpdate: 'cascade'
-      });
+      // Transaction.hasOne(models.wallet, {
+      //   foreignKey: 'id',
+      //   onDelete: 'cascade',
+      //   onUpdate: 'cascade'
+      // });
       Transaction.hasMany(models.User, {
         foreignKey: 'id',
         onDelete: 'cascade',
@@ -39,7 +39,8 @@ module.exports = (sequelize, DataTypes) => {
     recipientId: DataTypes.STRING,
     amount: DataTypes.STRING,
     chargeId: DataTypes.INTEGER,
-    currency: DataTypes.STRING
+    currency: DataTypes.STRING,
+    transactionId: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Transaction',

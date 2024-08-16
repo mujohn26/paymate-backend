@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.Transaction.belongsTo(wallet, { foreignKey: 'walletId', });
+
     }
   }
   wallet.init({
@@ -18,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
     walletName: DataTypes.STRING,
     accountId: DataTypes.STRING,
     walletLogo: DataTypes.STRING,
-    phoneNumber: DataTypes.STRING
+    phoneNumber: DataTypes.STRING,
+    amount: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'wallet',
